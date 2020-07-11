@@ -1,0 +1,52 @@
+{%load staticfiles%}
+{% if team %}
+    <!-- ======= Team Section ======= -->
+    <div id="team" class="our-team-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline text-center">
+              <h2>Our special Team</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {% for t in team %}
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="single-team-member">
+              <div class="team-img">
+                <a href="#">
+                  <img src="{% static  t_p_path %}{{ t.photo }}" %}" alt="">
+                </a>
+                <div class="team-social-icon text-center">
+                  <ul>
+                    <li>
+                      <a href="{{t.facebook}}">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{t.twitter}}">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{t.instagram}}">
+                        <i class="fa fa-instagram"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="team-content text-center">
+                <h4>{{t.name}}</h4>
+                <p>{{t.position}}</p>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+          <!-- End column -->
+        </div>
+      </div>
+    </div><!-- End Team Section -->
+{% endif %}

@@ -1,0 +1,251 @@
+{%load staticfiles%}
+<!-- BEGIN FOOTER -->
+<div class="footer">
+    <div class="footer-inner">
+        2013 &copy; Metronic by keenthemes.
+    </div>
+    <div class="footer-tools">
+        <span class="go-top">
+        <i class="icon-angle-up"></i>
+        </span>
+    </div>
+</div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->   <script src="{% static "assets2/plugins/jquery-1.10.1.min.js"" %}" type="text/javascript"></script>
+<script src="{% static "assets2/plugins/jquery-migrate-1.2.1.min.js"" %}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{% static "assets2/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js"" %}" type="text/javascript"></script>      
+<script src="{% static "assets2/plugins/bootstrap/js/bootstrap.min.js"" %}" type="text/javascript"></script>
+<script src="{% static "assets2/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"" %}" type="text/javascript" ></script>
+<!--[if lt IE 9]>
+<script src="assets/plugins/excanvas.min.js"" %}"></script>
+<script src="assets/plugins/respond.min.js"" %}"></script>  
+<![endif]-->   
+<script src="{% static "assets2/plugins/jquery-slimscroll/jquery.slimscroll.min.js"" %}" type="text/javascript"></script>
+<script src="{% static "assets2/plugins/jquery.blockui.min.js"" %}" type="text/javascript"></script>  
+<script src="{% static "assets2/plugins/jquery.cookie.min.js"" %}" type="text/javascript"></script>
+<script src="{% static "assets2/plugins/uniform/jquery.uniform.min.js"" %}" type="text/javascript" ></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="{% static "assets2/plugins/select2/select2.min.js"" %}"></script>
+<script type="text/javascript" src="{% static "assets2/plugins/data-tables/jquery.dataTables.min.js" %}"></script>
+<script type="text/javascript" src="{% static "assets2/plugins/data-tables/DT_bootstrap.js" %}"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{% static "assets2/scripts/app.js"" %}"></script>
+<script src="{% static "assets2/scripts/table-advanced.js" %}"></script> 
+<script src="{% static "assets2/scripts/form-samples.js"" %}"></script>   
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function() {    
+       // initiate layout and plugins
+       App.init();
+       List();
+       TableAdvanced.init();
+       FormSamples.init();
+       $( "#btn_disable" ).hide();
+       $( "#loading" ).hide();
+       $( "#loading2" ).hide();
+       $( "#loading3" ).hide();
+    });
+    $("form#save_service").submit(function(event){
+        event.preventDefault();
+        Save();
+    });
+
+    
+
+
+    $("form#edit_service").submit(function(event){
+        event.preventDefault();
+        
+        Edit();
+    });
+    $("#btn_delete").click('submit',function(event){
+        event.preventDefault();
+        alert('Button is Working');
+        // Delete();
+    });
+
+    // ADD NEW service
+    function Save(){
+        var formData = new FormData();
+        formData.append('service_name', $("#service_name").val());
+        formData.append('service_description',$('#service_description').val());
+        formData.append('service_image',$('#service_image').val());
+        Image_file = document.getElementById("service_image").files[0];
+        formData.append('image_file',Image_file);
+        formData.append('status',$('#status').val());
+        formData.append('csrfmiddlewaretoken',$('input[name=csrfmiddlewaretoken]').val());
+            $.ajax({
+                type:'POST',
+                url: '/add_service/',
+                processData: false,
+                contentType:false,
+                data: formData,
+                beforeSend : function(){
+                    
+                        
+                        $("#service_name").prop('disabled', 'disabled');
+                        $("#service_description").prop('disabled', 'disabled');
+                        $("#service_image").prop('disabled', 'disabled');
+                        $("#status").prop('disabled', 'disabled');
+                        $('#btn_save').prop('disabled', 'disabled');
+                        $('#loading').show();
+                        $('#save').hide();
+                        
+                },
+                success : function(text){
+                    if(text=='Saved')
+                        
+                        $("#service_name").val('').removeAttr('disabled');
+                        $("#service_description").val('').removeAttr('disabled');
+                        $("#service_image").val('').removeAttr('disabled');
+                        $("#status").val('').removeAttr('disabled');
+                        $('#btn_save').removeAttr('disabled');
+                        $('#loading').hide();
+                        $('#save').show();
+                        List();
+                }
+            }); 
+        }
+    // EDIT AND UPDATE service
+    function Edit(){
+        var formData = new FormData();
+        formData.append('edit_service_id', $("#edit_service_id").val());
+        formData.append('edit_service_name', $("#edit_service_name").val());
+        formData.append('edit_service_description',$('#edit_service_description').val());
+        formData.append('service_icon',$('#service_icon').val());
+        formData.append('edit_status',$('#edit_status').val());
+        formData.append('csrfmiddlewaretoken',$('input[name=csrfmiddlewaretoken]').val());
+            $.ajax({
+                type:'POST',
+                url: '/edit_service/',
+                processData: false,
+                contentType:false,
+                data: formData,
+                beforeSend : function(text){
+                    
+                        
+                        $("#edit_service_name").prop('disabled', 'disabled');
+                        $("#edit_service_no").prop('disabled', 'disabled');
+                        $("#edit_service_description").prop('disabled', 'disabled');
+                        $("#edit_contentTwo").prop('disabled', 'disabled');
+                        $("#service_icon").prop('disabled', 'disabled');
+                        $("#edit_status").prop('disabled', 'disabled');
+                        $('#btn_edit').prop('disabled', 'disabled');
+                        $('#loading2').show();
+                        $('#edit').hide();
+                        $('#btn_delete').hide();
+                        
+                },
+                success : function(text){
+                    if(text=='Updated')
+                        alert('Updated!!!');
+                        
+                        $('#edit_modal').modal('hide');
+                        $('#edit').show();
+                        $('#loading2').hide();
+                        $('#delete').show();
+                        List();
+                        
+                }
+            }); 
+        }
+
+        function Delete(){
+        var formData = new FormData();
+        formData.append('edit_service_id', $("#edit_service_id").val());
+        
+            $.ajax({
+                type:'POST',
+                url: '/delete_service/',
+                processData: false,
+                contentType:false,
+                data: formData,
+                beforeSend : function(text){
+                        $('#btn_delete').prop('disabled', 'disabled');
+                        $('#loading3').show();
+                        $('#delete').hide();
+                        
+                        
+                },
+                success : function(text){
+                    if(text=='Deleted')
+                        alert('Deleted!!!');
+                        
+                        $('#edit_modal').show();
+                        $('#loading2').hide();
+                        $('#delete').show();
+                }
+            }); 
+        }
+    // DISPLAY serviceS
+    function List(){
+        var formData = new FormData();
+        formData.append('csrfmiddlewaretoken',$('input[name=csrfmiddlewaretoken]').val());
+        $.ajax({
+            url:"/list_service/",
+            dataType : "html",
+            success:function(text){
+                console.log(text)
+                $('#display').html(text);
+            }, 
+        });
+    }
+
+    // Edit Button
+    function Edit_service(id,name,service_no,title,content,status, image_name){
+        $( "#edit_modal" ).modal("show");
+        $("#edit_service_id").val(id).removeAttr('disabled');
+        $("#edit_service_name").val(name).removeAttr('disabled');
+        $("#edit_service_no").val(service_no).removeAttr('disabled');
+        $("#edit_service_description").val(title).removeAttr('disabled');
+        $("#edit_contentTwo").val(content).removeAttr('disabled');
+        $("#service_icon").removeAttr('disabled');
+        $("a[href='/media/']").attr('href', '/media/service/'+image_name)
+        $("#edit_status").val(status).removeAttr('disabled');
+        $("#btn_edit").removeAttr('disabled');
+        
+
+    }
+    // ADD NEW service -  
+    // ENABLE BUTTON
+    $( "#btn_enable" ).click(function() {
+        
+        $("#service_name").removeAttr('disabled');
+        $("#service_no").removeAttr('disabled');
+        $("#service_description").removeAttr('disabled');
+        $("#contentTwo").removeAttr('disabled');
+        $("#service_image").removeAttr('disabled');
+        $("#status").removeAttr('disabled');
+        $( "#btn_enable" ).hide();
+        $( "#btn_disable" ).show();
+        $("#btn_save").removeAttr('disabled');
+        $("#btn_cancel").removeAttr('disabled');
+        $( "#enable_module" ).modal("hide");
+        $("#service_name").focus();
+    });
+    // DISABLED BUTTON
+    $( "#btn_disable" ).click(function() {
+        
+        $("#service_name").prop('disabled', 'disabled');
+        $("#service_no").prop('disabled', 'disabled');
+        $("#service_description").prop('disabled', 'disabled');
+        $("#contentTwo").prop('disabled', 'disabled');
+        $("#service_image").prop('disabled', 'disabled');
+        $("#status").prop('disabled', 'disabled');
+        $("#btn_save").prop('disabled', 'disabled');
+        $("#btn_cancel").prop('disabled', 'disabled');
+        $( "#btn_enable" ).show();
+        $( "#btn_disable" ).hide();
+
+        $( "#enable_module" ).modal("hide");
+    });
+
+</script>
+<!-- END JAVASCRIPTS -->  
+</body>
+<!-- END BODY -->
+</html>

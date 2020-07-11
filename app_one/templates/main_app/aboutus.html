@@ -1,0 +1,187 @@
+{%load staticfiles%} 
+
+  <!-- BEGIN PAGE -->  
+        
+		<div class="page-content">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            
+			<div id="enable_module" class="modal hide">
+				<div class="modal-header">
+					<button data-dismiss="modal" class="close" type="button"></button>
+					<h3>Enable Module</h3>
+				</div>
+				<div class="modal-body">
+					<p>
+                    <button id = "btn_enable" class = "btn red" >
+                        <div id="enable">OFF</div>
+                    </button>
+                    <button id = "btn_disable" class = "btn green" >
+                        <div id="disable">ON</div>
+                    </button>
+                    </p>
+				</div>
+			</div>
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE CONTAINER-->
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->   
+				<div class="row-fluid">
+					<div class="span12">
+						<h3 class="page-title">
+							Sliders
+						</h3>
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home"></i>
+								<a href="/home/">Home</a> 
+								<span class="icon-angle-right"></span>
+							</li>
+							<li>
+								<a href="/slider/">Slider</a>
+								
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<!-- END PAGE HEADER-->
+                <!-- BEGIN PAGE CONTENT-->
+                
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="tabbable tabbable-custom boxless">
+							<ul class="nav nav-tabs">
+                                <li class="active"><a href="#tab_1" data-toggle="tab">Slider</a></li>
+                                    <!-- ADD NEW SLIDER  -->
+                                
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_1">
+									<div class="portlet box blue">
+										<div class="portlet-title">
+											<div class="caption"><i class="icon-reorder"></i>Slider Form </div>
+											<div class="tools">
+												<a href="javascript:;" class="collapse"></a>
+												<a href="#enable_module" data-toggle="modal" class="config"></a>
+                                                
+												
+											</div>
+										</div>
+										<div class="portlet-body form">
+											<!-- BEGIN FORM-->
+											<form action="/slider/" id = "save_slider" enctype="multipart/form-data" class="horizontal-form">{% csrf_token %} 
+												<h3 class="form-section">Slider Info</h3>
+												<div class="row-fluid">
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" for="slider_name">Slider Name</label>
+															<div class="controls">
+																<input type="text" id="slider_name" name = "slider_name" class="m-wrap span12" placeholder="Generica Pharmacy" disabled required>
+																<span class="help-block">Note: the Name should be Unique</span>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" for="slider_no">Slider Action</label>
+															<div class="controls">
+																<Select type="text" id="slider_no" name = "slider_no" class="m-wrap span12" placeholder="Lim" disabled required>
+                                                                    <option value="">Please select the action...</option>
+                                                                    <option value="1">Box</option>
+                                                                    <option value="2">Fade image</option>
+																</Select>
+																<span class="help-block">Note: it refers to the image action in the main page</span>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<!--/row--> 
+												<h3 class="form-section">Content</h3>
+												<div class="row-fluid">
+													<div class="span12">
+														<div class="control-group">
+															<label class="control-label" for="contentOne"></label>Title</label>
+															<div class="controls">
+																<input type="text" class="m-wrap span12" name = "contentOne" id = "contentOne" disabled required >
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row-fluid">
+													<div class="span12">
+														<div class="control-group">
+															<label class="control-label" for="contentTwo" >Content</label>
+															<div class="controls">
+																<input type = "text" id = "contentTwo" name = "contentTwo" class ="m-wrap span12" disabled placeholder="Content here..." required>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+													
+												</div>
+												<!--/row-->           
+												<div class="row-fluid">
+                                                    <div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" for="slider_image"> Image</label>
+															<div class="controls">
+                                                                <input type="file" name = "slider_image" id = "slider_image" class = "form-control" disabled required>
+
+																<span class="help-block">Recheck the size of your image before uploading it</span>
+															</div>
+														</div>
+													</div>  
+													<!--/span-->
+													<div class="span6 ">
+														<div class="control-group">
+															<label class="control-label" for="status" >Status</label>
+															<div class="controls">
+																<select  class="m-wrap span12" id = "status" name = "status" disabled required>
+                                                                    <option value="1">Active</option>
+                                                                    <option value="0">InActive</option>
+                                                                </select>
+															</div>
+														</div>
+													</div>
+													<!--/span-->
+												</div>
+												<div class="form-actions">
+                                                    <button type="submit" class="btn blue" id = "btn_save" disabled>
+                                                        <div id = "save">
+                                                            <i class="icon-save" id = "save_icon"></i>Save    
+                                                        </div>
+                                                        <div id = "loading">
+                                                            <i class="fa fa-circle-o-notch fa-spin"> </i>Loading...
+                                                        </div>
+                                                    </button>
+                                                       <button type="button" class="btn" id = "btn_cancel" disabled >
+                                                            <div id = "save">
+                                                                <!-- <i class="icon-" id = "save_icon"></i> -->
+                                                                Cancel
+                                                            </div>
+                                                            <div id = "loading">
+                                                                
+                                                             </div>
+                                                    </button>
+												</div>
+											</form>
+											<!-- END FORM--> 
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->         
+			</div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+		<!-- END PAGE -->  
+	</div>
+	<!-- END CONTAINER -->
+
+	<!-- END JAVASCRIPTS -->   

@@ -1,0 +1,24 @@
+
+{% if sliders %}
+{% for s in sliders %}
+<tr>
+    <td>{{s.name}}</td>
+{%if s.SliderNo == 1%}
+    <td>Box</td>
+{%else%}
+    <td>Fade Image</td>
+{%endif%}
+    <td>{{s.ContentOne}}</td>
+    <td>{{s.ContentTwo}}</td>
+{%if s.status == 1%}
+    <td>Active</td>
+{%else%}
+    <td>InActive</td>
+{%endif%}
+    <td>
+        <button class = "btn green" onclick="Edit_slider('{{s.id}}','{{s.name}}','{{s.SliderNo}}','{{s.ContentOne}}','{{s.ContentTwo}}','{{s.status}}','{{s.FileName}}')">Edit</button>
+        <button class = "btn red">Delete</button>
+    </td>
+</tr>
+{%endfor%}
+{% endif %}

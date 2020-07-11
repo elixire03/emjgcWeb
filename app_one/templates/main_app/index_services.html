@@ -1,0 +1,42 @@
+{%load staticfiles%}
+{% if services %}
+
+    <!-- ======= Services Section ======= -->
+    <div id="services" class="services-area area-padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="section-headline services-head text-center">
+              <h2>Our Services</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <!-- Start Left services -->
+          {% for s in services %}
+          {% if s.serviceStatus == 0 %}
+
+          {% else %}
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="about-move">
+              <div class="services-details">
+                <div class="single-services">
+                  <a class="services-icon" href="#">
+                    <i class="fa fa-code"></i>
+                  </a>
+                  <h4>{{s.serviceName}}</h4>
+                  <p>
+                    {{s.serviceDescription}}
+                  </p>
+                </div>
+              </div>
+              <!-- end about-details -->
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          
+        </div>
+      </div>
+    </div><!-- End Services Section -->
+{% endif %}

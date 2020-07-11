@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+	<meta charset="utf-8" />
+	<title>Metronic | Form Stuff - Advance Form Samples</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	<link href="{% static "assets2/plugins/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static "assets2/plugins/bootstrap/css/bootstrap-responsive.min.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static "assets2/plugins/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "assets2/css/style-metro.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "assets2/css/spinners.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static "assets2/css/style.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static "assets2/css/style-responsive.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static "assets2/css/themes/default.css" %}" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="{% static "assets2/plugins/uniform/css/uniform.default.css" %}" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+	<!-- BEGIN PAGE LEVEL STYLES --> 
+    <link rel="stylesheet" type="text/css" href="{% static "assets2/plugins/select2/select2_metro.css" %}" />
+	<link rel="stylesheet" href="{% static "assets2/plugins/data-tables/DT_bootstrap.css" %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<link rel="shortcut icon" href="{% static "favicon.ico" %" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+	<!-- BEGIN HEADER -->   
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+		<!-- BEGIN TOP NAVIGATION BAR -->
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<!-- BEGIN LOGO -->
+				<a class="brand" href="index.html">
+				<img src="{% static "assets2/img/logo.png" %}" alt="logo" />
+				</a>
+				<!-- END LOGO -->
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+				<img src="{% static "assets2/img/menu-toggler.png" %}" alt="" />
+				</a>          
+				<!-- END RESPONSIVE MENU TOGGLER -->            
+				<!-- BEGIN TOP NAVIGATION MENU -->              
+				<ul class="nav pull-right">
+					<!-- BEGIN NOTIFICATION DROPDOWN -->   
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<img alt="" src="{% static "assets2/img/avatar1_small.jpg" %}">
+						<span class="username">User</span>
+						<i class="icon-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/profile/"><i class="icon-user"></i> My Profile</a></li>
+							<li><a href="/logout/"><i class="icon-key"></i> Log Out</a></li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+				<!-- END TOP NAVIGATION MENU --> 
+			</div>
+		</div>
+		<!-- END TOP NAVIGATION BAR -->
+	</div>
+	<!-- END HEADER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container row-fluid">
+		<!-- BEGIN SIDEBAR -->
+		<div class="page-sidebar nav-collapse collapse">
+			<!-- BEGIN SIDEBAR MENU -->        
+			<ul class="page-sidebar-menu">
+				{% if request.get_full_path == "/sliders/" or request.get_full_path == "/services/" or request.get_full_path == "/aboutus/" or request.get_full_path == "/team/" or request.get_full_path == "/working/" or request.get_full_path == "/projects/" or request.get_full_path == "/company_news/" or request.get_full_path == "/contact_us/"%}
+				<li class="active ">
+				{%else%}
+				<li>
+				{%endif%}
+					<a href="javascript:;">
+					<i class="icon-home"></i> 
+					<span class="title">View Panel</span>
+					{% if request.get_full_path == "/sliders/" or request.get_full_path == "/services/" or request.get_full_path == "/aboutus/" or request.get_full_path == "/team/" or request.get_full_path == "/working/" or request.get_full_path == "/projects/" or request.get_full_path == "/company_news/" or request.get_full_path == "/contact_us/"%}
+					<span class="selected"></span>
+					<span class="arrow open"></span>
+					{%else%}
+					<span class="arrow"></span>
+					{%endif%}
+					</a>
+					<ul class="sub-menu">
+						{% if request.get_full_path == "/sliders/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/sliders/">
+                                <i class="icon-home"></i>Slider</a>
+						</li>
+						{% if request.get_full_path == "/aboutus/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/aboutus/">
+							About us</a>
+						</li>
+						{% if request.get_full_path == "/services/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/services/">
+                            Services</a>
+						</li>
+						{% if request.get_full_path == "/team/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/team/">
+							Team</a>
+						</li>
+						{% if request.get_full_path == "/working/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/working/">
+							Working with us</a>
+						</li>
+						{% if request.get_full_path == "/projects/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/projects/">
+							Projects</a>
+						</li>
+						{% if request.get_full_path == "/company_news/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/company_news/">
+							Company News</a>
+						</li>
+						{% if request.get_full_path == "/contact_us/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/contact_us/">
+                            Contact Us</a>
+						</li>
+					</ul>
+				</li>
+				<li >
+					<a href="javascript:;">
+					<i class="icon-gear"></i> 
+					<span class="title">Settings</span>
+					{% if request.get_full_path == "/company_settings/" or request.get_full_path == "/email_settings/" %}
+					<span class="selected"></span>
+					<span class="arrow open"></span>
+					{%else%}
+					<span class="arrow"></span>
+					{%endif%}
+					</a>
+					<ul class="sub-menu">
+						{% if request.get_full_path == "/company_settings/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/company_settings/">
+							Company Settings</a>
+                        </li>
+                        {% if request.get_full_path == "/email_settings/" %}
+						<li class="active">
+						{%else%}
+						<li>
+						{%endif%}
+							<a href="/email_settings/">
+							Email Settings</a>
+						</li>
+						
+					</ul>
+				</li>
+				
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+		<!-- END SIDEBAR -->
+     
