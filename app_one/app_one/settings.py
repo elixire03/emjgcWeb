@@ -25,7 +25,7 @@ SECRET_KEY = 'm9@pnamr)mro@r1^p+a&dia!b4t2i627j7v!y&d9^_gfxjarn^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [http://elixire03.pythonanywhere.com/]
+ALLOWED_HOSTS = ['elixire03.pythonanywhere.com']
 
 
 # Application definition
